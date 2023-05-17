@@ -13,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 
-@EqualsAndHashCode(callSuper = true)
+
 @Entity(name = "User")
 @Table(name = "tbl_user", uniqueConstraints = {
         @UniqueConstraint(name = "user_email_unique", columnNames = "email"),
@@ -40,11 +40,12 @@ public class User {
     )
     private String email;
 
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(
-            name = "email",
+            name = "username",
             nullable = false
     )
     private String username;
