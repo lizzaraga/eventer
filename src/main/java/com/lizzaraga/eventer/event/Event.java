@@ -2,15 +2,15 @@ package com.lizzaraga.eventer.event;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,6 +53,12 @@ public class Event {
     private String description;
 
     @Column(
+            name = "images"
+    )
+    @ElementCollection
+    private List<String> images = new ArrayList<>();
+
+    @Column(
             name = "start_date",
             nullable = false
     )
@@ -64,10 +70,12 @@ public class Event {
     private LocalDateTime endDate;
 
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updateAt;
+    protected LocalDateTime updateAt;
+
+
 
     public Event(String title, String description, LocalDateTime startDate, LocalDateTime endDate) {
         this.title = title;
